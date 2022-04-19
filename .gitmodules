@@ -1,0 +1,3 @@
+[submodule "submodules/nvm"]
+	path = submodules/nvm
+	url = https://github.com/nvm-sh/nvm

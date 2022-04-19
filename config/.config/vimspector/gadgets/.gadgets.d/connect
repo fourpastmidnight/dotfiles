@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+PIPE=$(python -c 'import json; print( json.load( open( "session.json" ))["debugServicePipeName"] )')
+ssh -L 4321:$PIPE localhost

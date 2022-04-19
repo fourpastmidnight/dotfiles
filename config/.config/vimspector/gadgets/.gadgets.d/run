@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+export PSES_PATH=$HOME/.vim/plugged/vimspector/gadgets/PowerShellEditorServices
+export SESSION_PATH=$(pwd)
+
+pwsh -NoProfile -Command "$PSES_PATH/PowerShellEditorServices/Start-EditorServices.ps1 -BundleModulePath $PSES_PATH -LogPath $SESSION_PATH/session.log -SessionDetailsPath $SESSION_PATH/session.json -FeatureFlags @() -AdditionalModules @() -HostName 'Vimspector' -HostProfileId 'vimspector' -HostVersion '1.0.0' -LogLevel Verbose -DebugServiceOnly"
