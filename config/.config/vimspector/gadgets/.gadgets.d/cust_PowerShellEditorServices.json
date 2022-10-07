@@ -15,7 +15,6 @@
                     "name": "cust_PowerShellEditorServices",
                     "type": "PowerShell",
                     "command": [
-                        // echo "Initializing PowerShell Debug Adapter..."; pwsh -NoProfile -File "${gadgetDir}/cust_PowerShellEditorServices/PowerShellEditorServices/Start-EditorServices.ps1" -BundledModulesPath \"${gadgetDir}/cust_PowerShellEditorServices/\" -DebugServiceOnly -HostName localhost -HostProfileId vimspector -HostVersion '1.0.0' -LogPath $PWD/tmp.log -LogLevel Verbose -FeatureFlags @() -AdditionalModules @() -SessionDetailsPath \$PWD/tmp.session.json
                         "echo \"Initializing the PowerShell Debug Adapter...\"; pwsh -NoProfile -File ${gadgetDir}/cust_PowerShellEditorServices/PowerShellEditorServices/Start-EditorServices.ps1 -BundledModulesPath ${gadgetDir}/cust_PowerShellEditorServices/ -LogPath $PWD/session.log -SessionDetailsPath $PWD/session.json -FeatureFlags @() -AdditionalModules @() -HostName Vimspector -HostProfileId vimspector -HostVersion '1.0.0' -LogLevel Verbose -DebugServiceOnly"
                     ]
                 }
