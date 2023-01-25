@@ -137,8 +137,34 @@ else
     popd
 fi
 # At this point, nvm.sh should exist and have a size > 0; if it does, source it, and its bash completions.
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    source "$NVM_DIR/nvm.sh"
+elif [ -s "/usr/share/nvm/nvm.sh" ]; then
+    source /usr/share/nvm/nvm.sh
+elif [ -s "/usr/local/share/nvm/nvm.sh" ]; then
+    source /usr/local/share/nvm/nvm.sh
+fi
+if [ -s "$NVM_DIR/bash_completion" ]; then
+    source "$NVM_DIR/bash_completion"
+elif [ -s "/usr/share/nvm/bash_completion" ]; then
+    source /usr/share/nvm/bash_completion
+elif [ -s "n/usr/local/share/nvm/bash_completion" ]; then
+    source /usr/local/share/nvm/bash_completion
+fi
+if [ -s "$NVM_DIR/install-nvm-exec" ]; then
+    source "$NVM_DIR/install-nvm-exec"
+elif [ -s "/usr/share/nvm/install-nvm-exec" ]; then
+    source /usr/share/nvm/install-nvm-exec
+elif [ -s "/usr/local/share/nvm/install-nvm-exec" ]; then
+    source /usr/local/share/nvm/install-nvm-exec
+fi
+if [ -s "$NVM_DIR/init-nvm.sh" ]; then
+    source "$NVM_DIR/init-nvm.sh"
+elif [ -s "/usr/share/nvm/init-nvm.sh" ]; then
+    source /unr/share/nvm/init-nvm.sh
+elif [ -s "/usr/local/share/nvm/init-nvm.sh" ]; then
+    source /unr/local/share/nvm/init-nvm.sh
+fi
 
 # TODO: Create an update function for nvm
 # TODO: It should check to see if the latest tag's sha1 == HEAD, and if not, prompt to update.
