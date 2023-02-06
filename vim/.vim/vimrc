@@ -1,3 +1,24 @@
+" Vimrc
+"
+" Shamelessly borrowed from https://github.com/christoomey/dotfiles/blob/master/vim/vimrc.
+"
+" I was looking for a way to better organize my plugins and their settings and wanted to 'modularize' my
+" vimrc configuration. I happened to look at Chris's vimrc in his dotfiles and it was EXACTLY what I was
+" envisioning.
+"
+" The only addition I'm going to look to make is to look for allowing the specification of dependencies.
+" Not full-blown dependency management--juts along the lines of 'this plugin requries these other plugins'.
+" I'm not going to go crazy with tracking 'plugin version' dependencies. And this should only be needed in the
+" case where its requried in order to set settings where plugin load ordering is important.
+"
+" This file contains the minimal settings to set the foundation, with the majority of the configuration
+" settings living in f iles spread between .vim/rcfiles and .vim/rcplugins.
+
+set nocompatible
+
+" Need to set the leader before defining any leader mappings
+"let mapleader = "\<Space>"
+
 " Automatic installation of vim-plug if not found
 let data_dir = has('nvim') ? stdpath('data') . '/site' : "$HOME/.vim"
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -5,11 +26,14 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Automatically install missing plugins. NOTE: This may increase vim startup time.
-" autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-"             \ | PlugInstall --sync
-"             \ | source $MYVIMRC
-"             \ | endif
+let s:autoinstall_missing_plugins = 0
+if (s:autoinstall_missing_plugins)
+    " Automatically install missing plugins. NOTE: This may increase vim startup time.
+    autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+                \ | PlugInstall --sync
+                \ | source $MYVIMRC
+                \ | endif
+endif
 
 augroup filetype_vim
     autocmd!
@@ -28,14 +52,26 @@ function! IsWSL()
     return 0
 endfunction
 
-function! TestGetFiles(directory)
-    let directory_splat = '$HOME/.vim/' . a:directory . '/**'
-    for config_file in split(glob(directory_splat), '\n')
-        if filereadable(config_file)
-            execute 'source' config_file
-        endif
-    endfor
+" Get all configuration files in the specified directory under $HOME/.vim
+"   Use '/a/directory/config.vim' to source a specific configuration file.
+"   Use '/a/directory/*' to get all configuration files in the directory /a/directory.
+"   Use '/a/directory/**' to get all configuration files in the directory /a/directory and any of its
+"     sub-directories.
+function! s:SourceConfigFilesIn(configFiles)
+    if a:configFiles =~? '\v\*(|\*|\..+)?'
+        execute 'source' a:configFiles
+    else
+        let config_files  = '$HOME/.vim/' . a:configFiles
+        for config_file in split(glob(directory_spalt), '\n')
+            if filereadable(config_file)
+                execute 'source' config_file
+            endif
+        endfor
+    endif
 endfunction
+
+" Force shell to /bin/bash to avoid E484 can't find tmp files in /var/folders/*
+set shell=/bin/bash
 
 " This can be used to 'conditionally load' plugins so that :PlugClean will work properly
 function! LoadOn(cond, ...)
@@ -46,171 +82,11 @@ endfunction
 iabbrev servcie service
 
 call plug#begin()
-" Themes
-Plug 'AlessandroYorba/Alduin'
-Plug 'ackyshake/Spacegray.vim'
-Plug 'aereal/vim-colors-japanesque'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'aliou/moriarty.vim'
-Plug 'altercation/vim-colors-solarized'
-Plug 'arcticicestudio/nord-vim'
-Plug 'artanikin/vim-synthwave84'
-Plug 'arzg/vim-corvine'
-Plug 'arzg/vim-substrata'
-Plug 'arzg/vim-colors-xcode'
-Plug 'balanceiskey/vim-framer-syntax'
-Plug 'betoissues/contrastneed-theme'
-Plug 'blackgate/tropikos-vim-theme'
-Plug 'blindFS/flattr.vim'
-Plug 'bluz71/vim-nightfly-guicolors'
-Plug 'carakan/new-railscasts-theme'
-Plug 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
-Plug 'chriskempson/base16-vim'
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'cocopon/iceberg.vim'
-Plug 'croaker/mustang-vim'
-Plug 'cseelus/vim-colors-clearance'
-Plug 'cseelus/vim-colors-lucid'
-Plug 'cseelus/vim-colors-tone'
-Plug 'DankNeon/vim'
-Plug 'danilo-augusto/vim-afterglow'
-Plug 'deathlyfrantic/vim-distill'
-Plug 'dikiaap/minimalist'
-Plug 'doums/darcula'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'dunckr/vim-monokai-soda'
-Plug 'duythinht/vim-coffee'
-Plug 'EdenEast/nightfox.nvim'
-Plug 'eemed/sitruuna.vim'
-Plug 'ehartc/Spink'
-Plug 'encody/nvim'
-Plug 'fcevado/molokai_dark'
-Plug 'flazz/vim-colorschemes'
-Plug 'flrnd/plastic.vim'
-Plug 'franbach/miramare'
-Plug 'gilsondev/lizard'
-Plug 'glortho/feral-vim'
-Plug 'gummesson/stereokai.vim'
-Plug 'haishanh/night-owl.vim'
-Plug 'J4CKR3D/Hypsteria'
-Plug 'jacoborus/tender.vim'
-Plug 'jansenfuller/crayon'
-Plug 'jaredgorski/SpaceCamp'
-Plug 'jdsimcoe/panic.vim'
-Plug 'joshdick/onedark.vim'
-Plug 'kadekillary/Turtles'
-Plug 'koirand/tokyo-metro.vim'
-Plug 'lewis6991/moonlight.vim'
-Plug 'lifepillar/vim-solarized8'
-Plug 'lifepillar/vim-wwdc16-theme'
-Plug 'Lokaltog/vim-distinguished'
-Plug 'lucasprag/simpleblack'
-Plug 'Marfisc/vorange'
-Plug 'maksimr/Lucius2'
-Plug 'mhartington/oceanic-next'
-Plug 'mkarmona/colorsbox'
-Plug 'morhetz/gruvbox'
-Plug 'nanotech/jellybeans.vim'
-Plug 'nightsense/carbonized'
-Plug 'nightsense/cosmic_latte'
-Plug 'nightsense/forgotten'
-Plug 'nightsense/nemo'
-Plug 'nightsense/stellarized'
-Plug 'nightsense/seabird'
-Plug 'nightsense/seagrey'
-Plug 'nightsense/snow'
-Plug 'nightsense/strawberry'
-Plug 'nightsense/vimspectr'
-Plug 'nightsense/vrunchbang'
-Plug 'nn1ks/vim-darkspace'
-Plug 'noahfrederick/vim-hemisu'
-Plug 'notpratheek/vim-luna'
-Plug 'oguzbilgic/sexy-railscasts-theme'
-Plug 'orthecreedence/void.vim'
-Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
-Plug 'quantum-omega/vim-burnttoast256', { 'name': 'burnttoast256' }
-Plug 'Rigellute/rigel'
-Plug 'rafalbromirski/vim-aurora'
-Plug 'rakr/vim-one'
-Plug 'ratazzi/blackboard.vim'
-Plug 'relastle/bluewery.vim'
-Plug 'rhysd/wallaby.vim'
-Plug 'scottymoon/vim-chalkboard'
-Plug 'scottymoon/vim-twilight'
-Plug 'sherifkandeel/vim-colors'
-Plug 'sickill/vim-monokai'
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
-Plug 'srcery-colors/srcery-vim'
-Plug 'tomasr/molokai'
-Plug 'shapeoflambda/dark-purple.vim'
-Plug 'stulzer/heroku-colorscheme'
-Plug 'tpope/vim-vividchalk'
-Plug 'trusktr/seti.vim'
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'vim-scripts/moria'
-Plug 'vim-scripts/obsidian2.vim'
-Plug 'vim-scripts/strange'
-Plug 'vim-scripts/synic.vim'
-Plug 'vim-scripts/twilight256.vim'
-Plug 'vim-scripts/vilight.vim'
-Plug 'w0ng/vim-hybrid'
-Plug 'wadackel/vim-dogrun', { 'branch': 'main' }
-Plug 'Zabanaa/neuromancer.vim'
+call s:SourceConfigFilesIn('rcplugins/colorschemes.vim')
+" TODO: Figure out a way to declaratively specify 'load order'.
+call s:SourceConfigFilesIn('rcplugins/ployglot.vim')
+call s:SourceConfigFilesIn('rcplugins/lang/*.vim')
 
-
-" Filetype Plugins
-" --------------------------------------------------
-
-" This plugin contains a TON of filetype plugins for syntax highlighting and formatting...
-Plug 'sheerun/vim-polyglot'
-" ...including...
-"Plug 'hail2u/vim-css3-syntax' " This is first because scss-syntax.vim depends on it.
-"Plug 'cakebaker/scss-syntax.vim'
-"Plug 'chrisbra/csv.vim'
-"Plug 'ekalinin/Dockerfile.vim'
-"Plug 'othree/html5.vim'
-"Plug 'pangloss/vim-javascript'
-"Plug 'pprovost/vim-ps1'   " Included in sheerun/ployglot
-"Plug 'tpope/vim-cucumber'
-
-" Configuration of filetype plugins in sheerun/vim-polyglot
-"-------------------------------------------------------------
-
-" Disable sheerun/vim-polyglot filetype plugins that I want to use different plugins for
-let g:polyglot_disabled = [
-\    'stylus'
-\]
-
-" Configure pangloss/vim-javascript
-let g:javascript_plugin_jsdoc = 1
-"let g:javascript_plugin_ngdoc = 1
-"let g:javascript_plugin_flow = 1
-"let g:javascript_conceal_function             = "ƒ"
-"let g:javascript_conceal_null                 = "ø"
-"let g:javascript_conceal_this                 = "@"
-"let g:javascript_conceal_return               = "⇚"
-"let g:javascript_conceal_undefined            = "¿"
-"let g:javascript_conceal_NaN                  = "ℕ"
-"let g:javascript_conceal_prototype            = "¶"
-"let g:javascript_conceal_static               = "•"
-"let g:javascript_conceal_super                = "Ω"
-"let g:javascript_conceal_arrow_function       = "⇒"
-"let g:javascript_conceal_noarg_arrow_function = "🞅"
-"let g:javascript_conceal_underscore_arrow_function = "🞅"
-map <LEADER>c :exec &conceallevel ? 'set conceallevel=0' : 'set conceallevel=1'<CR>
-
-" Configure HerringtonDarkholme/yats.vim
-"let g:typescript_conceal_function             = "ƒ"
-"let g:typescript_conceal_null                 = "ø"
-"let g:typescript_conceal_undefined            = "¿"
-"let g:typescript_conceal_this                 = "@"
-"let g:typescript_conceal_return               = "⇚"
-"let g:typescript_conceal_prototype            = "¶"
-"let g:typescript_conceal_super                = "Ω"
-
-Plug 'iloginow/vim-stylus', { 'for': ['stylus','css'] }
-
-" Syntax Plugs
 
 " Utility Plugs
 
