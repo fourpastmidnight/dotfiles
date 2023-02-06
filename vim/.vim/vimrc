@@ -1,7 +1,20 @@
+" Automatic installation of vim-plug if not found
 let data_dir = has('nvim') ? stdpath('data') . '/site' : "$HOME/.vim"
 if empty(glob(data_dir . '/autoload/plug.vim'))
     silent execute '!curl -fLo '.data_dir.'/autoload/plugin.vim --create-dirs https://raw.githubusercontent.junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
+" Automatically install missing plugins. NOTE: This may increase vim startup time.
+" autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+"             \ | PlugInstall --sync
+"             \ | source $MYVIMRC
+"             \ | endif
+
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
 
 " Detect if we're running in a WSL environment and return 1 or 0
 function! IsWSL()
@@ -15,11 +28,24 @@ function! IsWSL()
     return 0
 endfunction
 
+function! TestGetFiles(directory)
+    let directory_splat = '$HOME/.vim/' . a:directory . '/**'
+    for config_file in split(glob(directory_splat), '\n')
+        if filereadable(config_file)
+            execute 'source' config_file
+        endif
+    endfor
+endfunction
+
+" This can be used to 'conditionally load' plugins so that :PlugClean will work properly
+function! LoadOn(cond, ...)
+    let opts = get(a:000, 0, {})
+    return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
+
+iabbrev servcie service
+
 call plug#begin()
-
-" Let vim-plug manage vim-plug
-Plug 'junegunn/vim-plug'
-
 " Themes
 Plug 'AlessandroYorba/Alduin'
 Plug 'ackyshake/Spacegray.vim'
@@ -316,6 +342,7 @@ Plug 'ojroques/vim-oscyank', { 'branch': 'main' }
 nmap <leader>y <Plug>OSCYank
 
 Plug 'OmniSharp/omnisharp-vim'
+Plug 'neovimhaskell/haskell-vim'
 if IsWSL()
     let g:OmniSharp_translate_cygwin_wsl = 1
     let g:OmniSharp_selector_ui = ''
