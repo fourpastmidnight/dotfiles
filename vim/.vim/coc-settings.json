@@ -8,9 +8,16 @@
                 "stack.yaml",
                 "cabal.project",
                 "package.yaml",
-                "hie.yaml"
+                "hie.yaml",
+                "BUILD.bazel"
             ],
-            "filetypes": ["haskell", "lhaskell"]
+            "filetypes": ["haskell", "lhaskell", "hs", "lhs"],
+            "initializationOptions": {
+                "languageServerHaskell": {
+                    "hlintOn": true,
+                    "completionSnippetsOn": true
+                }
+            }
         }
     }
 }
