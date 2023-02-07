@@ -54,15 +54,17 @@ endfunction
 
 " Get all configuration files in the specified directory under $HOME/.vim
 "   Use '/a/directory/config.vim' to source a specific configuration file.
+"   Use '/a/directory/*.vim' to get all *.vim files in /a/directory.
 "   Use '/a/directory/*' to get all configuration files in the directory /a/directory.
 "   Use '/a/directory/**' to get all configuration files in the directory /a/directory and any of its
 "     sub-directories.
 function! s:SourceConfigFilesIn(configFiles)
-    if a:configFiles =~? '\v\*(|\*|\..+)?'
-        execute 'source' a:configFiles
+    if a:configFiles !~? '\v\*(|\*|\..+)?'
+        let config_file = '$HOME/.vim/' . a:configFiles
+        execute 'source' config_file
     else
         let config_files  = '$HOME/.vim/' . a:configFiles
-        for config_file in split(glob(directory_spalt), '\n')
+        for config_file in split(glob(config_files), '\n')
             if filereadable(config_file)
                 execute 'source' config_file
             endif
@@ -84,11 +86,10 @@ iabbrev servcie service
 call plug#begin()
 call s:SourceConfigFilesIn('rcplugins/colorschemes.vim')
 " TODO: Figure out a way to declaratively specify 'load order'.
-call s:SourceConfigFilesIn('rcplugins/ployglot.vim')
-call s:SourceConfigFilesIn('rcplugins/lang/*.vim')
-
-
-" Utility Plugs
+call s:SourceConfigFilesIn('rcplugins/polyglot.vim')
+call s:SourceConfigFilesIn('rcplugins/formatting/*')
+call s:SourceConfigFilesIn('rcplugins/lang/*')
+call s:SourceConfigFilesIn('rcplugins/ide.vim')
 
 " Going to try vim-signify and see if that works faster/is better.
 "Plug 'airblade/vim-gitgutter'
@@ -100,13 +101,7 @@ call s:SourceConfigFilesIn('rcplugins/lang/*.vim')
 
 Plug 'easymotion/vim-easymotion'
 Plug 'edkolev/tmuxline.vim'
-Plug 'editorconfig/editorconfig-vim'
-let g:EditorConfig_exclude_patterns = [ 'fugitive://.*', 'scp://.*' ]
-" To disable editorconfig for a filetype, for example:
-" au FileType gitcommit let b:EditorConfig_disable = 1
 
-"Plug 'fsharp/vim-fsharp', { 'for': 'fsharp' }
-Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx' ], 'do': 'make clean && make install' }
 
 Plug 'iberianpig/tig-explorer.vim'
@@ -114,79 +109,8 @@ Plug 'iberianpig/tig-explorer.vim'
 " This doesn't seem to play nice with Coc, so leaving this commented out for now.
 "Plug 'ionide/Ionide-vim', { 'do': 'powershell -ExecutionPolicy Unrestricted .\\install.ps1', 'for': 'fsharp' }
 
-Plug 'Jorengarenar/vim-SQL-UPPER'
-" Configure vim-SQL-UPPER plugin
-let g:SQL_UPPER = 5
 
 Plug 'lifepillar/vim-colortemplate'
-Plug 'luochen1990/rainbow'
-" interface to be used in order listed
-" * `guis`: a list of `gui` (`:h highlight-gui`), used in order listed
-" * `ctermfgs`: a list of `ctermfg` (`:h highlight-ctermfg`)
-" * `cterms`: a list of `cterm` (`:h highlight-cterm`)
-" * `operators`: describe the operators you want to highlight. (NOTE: be
-" careful about special characters which need escaping; you can find more
-" examples [here](https://github.com/luochen/1990/rainbow/issues3), and you
-" can also read the [vim help about
-" syn-pattern](https://vimdoc.sourceforge.net/htmldoct/syntax.html#.syn-pattern).
-" Note that this option will be overwritten by the `step` part of
-" `parentheses`.
-" * `paretheses`: A list of parentheses definitions. A paretheses definition
-" contains parts like `start=/(/`, `step=/,/`, `stop=/)/`, `fold`,
-" `contained`,     `containedin=someSynNames`, `contains=@Spell`. See `:h syntax`
-" for more details. Note that the `step` part is defined by this plugin and so
-" it is not described by the official vim documentation.
-" * `parentheses_options`: options shared between different paretheses; things
-" like `containedin=xxxFuncBody`, `contains=@Spell` (or `contains=@NoSpell`)
-" ofter appear here. This option is often used to resolve 3rd-party plugin
-" compatibility issues.
-" * `separately`: Configure for specific filetypes. For filetypes without
-" separate configuration, value `0` means disable rainbow color only for this
-" type of file. `default` means keep the default shim for this filetype.
-" * `syn_name_prefix`: Add a prefix to the name of the syntax definition. This
-" option is used to resolve 3rd-party plugin compatibility issues.
-" * `after`: Execute some vim commands after the rainbow syntax definition.
-" Used to resolve 3rd-party plugin compatibility issues.
-" * Keep a field empty to use the default setting.
-"
-" For more advanced configuration samples, try searching with this tag:
-" http://github.com/luochen1990/rainbow/issues?utf8=y&q=label%3A"config+reference"+.
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-\    'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-\    'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-\    'guis': [''],
-\    'cterms': [''],
-\    'operators': '_,_',
-\    'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-\    'separately': {
-\         '*': {},
-\         'haskell': {
-\             'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/\v\{\ze[^-]/ end=/}/ fold']
-\         },
-\         'lisp': {
-\             'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3']
-\         },
-\         'markdown': {
-\             'parentheses_options': 'containedin-markdownCode contained'
-\         },
-\         'perl': {
-\             'syn_name_prefix': 'perlBlockFoldRainbow'
-\         },
-\         'powershell': {
-\             'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/\{/ end=/\}/ fold']
-\         },
-\         'stylus': {
-\             'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup']
-\         },
-\         'typescript': {
-\             'parentheses': ['start=/{/ end=/}// fold contains=@colorableGroup', 'start=/(/ end=/)/', 'start=/\[/ end=l\]/']
-\         },
-\         'vim': {
-\             'parentheses_options': 'containedin=vimFuncBody'
-\         }
-\    }
-\}
 
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'mattn/emmet-vim'
@@ -217,33 +141,7 @@ Plug 'mhinz/vim-sayonara'
 Plug 'ojroques/vim-oscyank', { 'branch': 'main' }
 nmap <leader>y <Plug>OSCYank
 
-Plug 'OmniSharp/omnisharp-vim'
 Plug 'neovimhaskell/haskell-vim'
-if IsWSL()
-    let g:OmniSharp_translate_cygwin_wsl = 1
-    let g:OmniSharp_selector_ui = ''
-endif
-Plug 'preservim/vim-markdown', { 'for': 'markdown' }
-" Configure the vim_markdown plugin
-let g:markdown_fenced_languages = ['html', 'javascript', 'typescript', 'powershell=ps1', 'c#', 'f#', 'css', 'scss', 'less', 'bash=sh', 'conf', 'json', 'toml', 'yaml']
-let g:vim_markdown_fenced_languages = ['html', 'javascript', 'typescript', 'powershell=ps1', 'c#', 'f#', 'css', 'scss', 'less', 'bash=sh', 'conf', 'help', 'json', 'toml', 'vim', 'yaml']
-let g:markdown_syntax_conceal = 1
-let g:vim_markdown_conceal = 1
-let g:vim_markdown_conceal_code_blocks = 1
-let g:vim_markdown_folding_disabled = 0
-let g:vim_markdown_folding_style_pythonic = 1
-let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_follow_anchor = 1
-let g:vim_markdown_math = 1
-let g:vim_markdown_no_default_keyMappings = 0
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_json_frontmatter = 1
-let g:vim_markdown_toml_frontmatter = 1
-let g:vim_markdown_strikethrough = 1
-let g:vim_markdown_auto_insert_bullets = 0
-let g:vim_markdown_new_list_item_indent = 0
-let g:vim_markdown_no_extensions_in_markdown = 1
-let g:vim_markdown_edit_url_in = 'current'  " Supported values: tab, vsplit, hsplit, current
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'preservim/nerdcommenter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -251,23 +149,16 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 "Plug 'Quramy/tsuquyomi', { 'for': ['typescript', 'javascript'] }
 "Plug 'Quramy/vim-dtsm'
 "Plug 'Quramy/vim-js-pretty-template'
-if has('win32')
-    Plug 'Shougo/vimproc.vim', { 'branch': 'master', 'do': 'curl -o C:\Users\cshea\.vim\plugged\vimproc.vim\lib\vimproc_win64.dll https://github.com/Shougo/vimproc.vim/releases/latest/download/vimproc_win64.dll' }
-elseif IsWSL()
-    Plug 'Shougo/vimproc.vim', { 'branch': 'master', 'do': 'curl -o /c/Users/cshea/.vim/plugged/vimproc.vim/lib/vimproc_win64.dll https://github.com/Shougo/vimproc.vim/releases/latest/download/vimproc_win64.dll' }
-else
-    Plug 'Shougo/vimproc.vim', { 'branch': 'master', 'do': 'make' }
-endif
 
-if has('nvim')
-    Plug 'Shougo/ddc.vim'
-    Plug 'vim-denops/denops.vim'
-else
-    Plug 'Shougo/ddc.vim'
-    Plug 'vim-denops/denops.vim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" if has('nvim')
+"     Plug 'Shougo/ddc.vim'
+"     Plug 'vim-denops/denops.vim'
+" else
+"     Plug 'Shougo/ddc.vim'
+"     Plug 'vim-denops/denops.vim'
+"     Plug 'roxma/nvim-yarp'
+"     Plug 'roxma/vim-hug-neovim-rpc'
+" endif
 
 "Plug 'simeji/winresizer'
 "let g:winresizer_gui_enable = 1
@@ -362,41 +253,7 @@ Plug 'yuezk/vim-js', { 'for': ['javascript','javascriptreact'] }
 Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript','typescriptreact'] }
 Plug 'maxmellon/vim-jsx-pretty', { 'for': ['typescript','typescriptreact'] }
 
-Plug 'bash-lsp/bash-language-server'
-Plug 'SirVer/ultisnips'
 
-" COC - Conqueror of Completion
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-" Automatically install the following extensions if they are not already installed:
-let g:coc_global_extensions=[
-            \ 'coc-css',
-            \ 'coc-deno',
-            \ 'coc-emoji',
-            \ 'coc-eslint',
-            \ 'coc-git',
-            \ 'coc-html',
-            \ 'coc-json',
-            \ 'coc-powershell',
-            \ 'coc-svg',
-            \ 'coc-tag',
-            \ 'coc-tsserver',
-            \ 'coc-vimlsp',
-            \ 'coc-xml',
-            \ 'coc-yaml',
-            \]
-"           \ 'ionide-coc-fsharp'
-"           \ 'coc-omni',
-"           \ 'coc-snippets',
-"           \ 'coc-ultisnips',
-"if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-"    let g:coc_global_extensions += ['coc-prettier']
-"endif
-"if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-"    let g:coc_global_extensions += ['coc-eslint']
-"endif
-Plug 'puremourning/vimspector'
-let g:vimspector_enable_mappings='human'
-let g:vimspector_base_dir=$HOME."/.vim/plugged/vimspector"
 
 call plug#end()
 
