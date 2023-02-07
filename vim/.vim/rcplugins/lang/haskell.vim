@@ -1,0 +1,2 @@
+Plug 'neovimhaskell/haskell-vim'
+

@@ -1,0 +1,2 @@
+Plug 'edkolev/tmuxline.vim'
+

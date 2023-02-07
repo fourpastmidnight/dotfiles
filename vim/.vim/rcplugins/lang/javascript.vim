@@ -17,3 +17,8 @@ let g:javascript_plugin_jsdoc = 1
 
 nnoremap <buffer> <localleader>c :exec &conceallevel ? 'set conceallevel=0' : 'set conceallevel=1'<CR>
 
+Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx' ], 'do': 'make clean && make install' }
+" TypeScript/JavaScript plugins and their configuration
+" Plug 'yuezk/vim-js', { 'for': ['javascript','javascriptreact'] }
+" Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript','typescriptreact'] }
+" Plug 'maxmellon/vim-jsx-pretty', { 'for': ['typescript','typescriptreact'] }

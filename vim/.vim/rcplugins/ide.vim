@@ -2,6 +2,8 @@
 " a powerful IDE complete with IntelliSense(r) (via LSP) and debugging (via DAP).
 " It also contains a few other plugins, such as rainbow bracket matching, etc.
 
+Plug 'bash-lsp/bash-language-server'
+
 Plug 'luochen1990/rainbow'
 " interface to be used in order listed
 " * `guis`: a list of `gui` (`:h highlight-gui`), used in order listed
@@ -93,7 +95,6 @@ else
     Plug 'Shougo/vimproc.vim', { 'branch': 'master', 'do': 'make' }
 endif
 
-Plug 'bash-lsp/bash-language-server'
 Plug 'SirVer/ultisnips'
 
 " COC - Conqueror of Completion
@@ -152,7 +153,10 @@ augroup END
 
 nmap <leader>do <Plug>(coc-codeaction)
 
+Plug 'preservim/nerdcommenter'
+
 Plug 'puremourning/vimspector'
 let g:vimspector_enable_mappings='human'
 let g:vimspector_base_dir=$HOME."/.vim/plugged/vimspector"
 
+Plug 'tpope/vim-commentary'
