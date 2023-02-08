@@ -15,10 +15,10 @@ Plug 'mhinz/vim-sayonara'
 Plug 'ojroques/vim-oscyank', { 'branch': 'main' }
 nmap <leader>y <Plug>OSCYank
 
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-  Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+        Plug 'Xuyuanp/nerdtree-git-plugin'
+        Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-dispatch'
@@ -40,8 +40,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'enricobacis/vim-airline-clock'
 Plug 'vim-airline/vim-airline-themes'
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+" Set this EARLY, so that the right powerline glyphs are used
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#bookmark#enabled = 1
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#clock#enabled = 1
@@ -73,7 +73,7 @@ let g:airline#extensions#coc#show_coc_status = 1
 let g:airline#extensions#csv#enabled = 1
 let g:airline#extensions#hunks#coc_git = 0
 let g:airline#extensions#lsp#enabled = 1
-let g:airline#extensions#lsp#error_symbol = "\uEA87"
+let g:airline#extensions#lsp#error_symbol = "\uF057"
 let g:airline#extensions#lsp#warning_symbol = "\uF071"
 let g:airline#extensions#lsp#show_line_numbers = 1
 let g:airline#extensions#lsp#open_lnum_symbol = '(' . "\uE0A1"
@@ -83,16 +83,17 @@ let g:airline#extensions#obsession#enabled = 1
 let g:airline#extensions#obsession#indicator_text = '$'
 let g:airline#extensions#omnisharp#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#buffer_idx_mode = 2
 let g:airline#extensions#tabline#show_splits = 1
 let g:airline#extensions#scrollbar#enabled = 1
 let g:airline#extensions#term#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 0
 let g:airline#extensions#vim9lsp#enabled = 1
-let g:airline#extensions#vim9lsp#error_symbol = "\uEA87 "
+let g:airline#extensions#vim9lsp#error_symbol = "\uF057 "
 let g:airline#extensions#vim9lsp#warning_symbol = "\uF071 "
 let g:airline#extensions#whitespace#enabled = 1
-let g:airline_powerline_fonts = 1
 let g:airline_left_sep = "\uE0B0"
 let g:airline_right_sep = "\uE0B2"
 "let g:airline_theme = 'spaceduck'
