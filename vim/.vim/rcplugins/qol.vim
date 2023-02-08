@@ -37,11 +37,9 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'enricobacis/vim-airline-clock'
+Plug 'vim-airline/vim-airline-themes'
 
-"let g:airline_theme = 'spaceduck'
-let g:airline_theme = 'base16_classic_dark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#bookmark#enabled = 1
@@ -86,18 +84,22 @@ let g:airline#extensions#obsession#indicator_text = '$'
 let g:airline#extensions#omnisharp#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 2
+let g:airline#extensions#tabline#show_splits = 1
 let g:airline#extensions#scrollbar#enabled = 1
 let g:airline#extensions#term#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 0
 let g:airline#extensions#vim9lsp#enabled = 1
-let g:airline#extensions#vim9lsp#error_symbol = "\uEA87"
-let g:airline#extensions#vim9lsp#warning_symbol = "\uF071"
+let g:airline#extensions#vim9lsp#error_symbol = "\uEA87 "
+let g:airline#extensions#vim9lsp#warning_symbol = "\uF071 "
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_left_sep = "\uE0B0"
 let g:airline_right_sep = "\uE0B2"
+"let g:airline_theme = 'spaceduck'
+let g:airline_theme = 'base16_classic_dark'
 function! AirlineInit()
-  let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}', ' ', "\uE0A3" . '%{col(".")}', ' ', 'clock'])
+  " let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}', ' ', "\uE0A3" . '%{col(".")}', ' ', 'clock'])
+  let g:airline_section_z = airline#section#create(["\uE0A1 %l/%L \uE0A3 %v (%p%%) ", g:airline_right_alt_sep . ' ', 'clock'])
 endfunction
 let g:airline_skip_empty_sections = 1
 "let g:airline_statusline_ontop = 1
