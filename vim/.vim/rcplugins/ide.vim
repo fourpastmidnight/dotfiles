@@ -10,28 +10,28 @@ Plug 'luochen1990/rainbow'
 " * `ctermfgs`: a list of `ctermfg` (`:h highlight-ctermfg`)
 " * `cterms`: a list of `cterm` (`:h highlight-cterm`)
 " * `operators`: describe the operators you want to highlight. (NOTE: be
-" careful about special characters which need escaping; you can find more
-" examples [here](https://github.com/luochen/1990/rainbow/issues3), and you
-" can also read the [vim help about
-" syn-pattern](https://vimdoc.sourceforge.net/htmldoct/syntax.html#.syn-pattern).
-" Note that this option will be overwritten by the `step` part of
-" `parentheses`.
+"                careful about special characters which need escaping; you can find more
+"                examples [here](https://github.com/luochen/1990/rainbow/issues3), and you
+"                can also read the [vim help about
+"                syn-pattern](https://vimdoc.sourceforge.net/htmldoct/syntax.html#.syn-pattern).
+"                Note that this option will be overwritten by the `step` part of
+"                `parentheses`.
 " * `paretheses`: A list of parentheses definitions. A paretheses definition
-" contains parts like `start=/(/`, `step=/,/`, `stop=/)/`, `fold`,
-" `contained`,     `containedin=someSynNames`, `contains=@Spell`. See `:h syntax`
-" for more details. Note that the `step` part is defined by this plugin and so
-" it is not described by the official vim documentation.
+"                 contains parts like `start=/(/`, `step=/,/`, `stop=/)/`, `fold`,
+"                 `contained`,     `containedin=someSynNames`, `contains=@Spell`. See `:h syntax`
+"                 for more details. Note that the `step` part is defined by this plugin and so
+"                 it is not described by the official vim documentation.
 " * `parentheses_options`: options shared between different paretheses; things
-" like `containedin=xxxFuncBody`, `contains=@Spell` (or `contains=@NoSpell`)
-" ofter appear here. This option is often used to resolve 3rd-party plugin
-" compatibility issues.
+"                          like `containedin=xxxFuncBody`, `contains=@Spell` (or `contains=@NoSpell`)
+"                          ofter appear here. This option is often used to resolve 3rd-party plugin
+"                          compatibility issues.
 " * `separately`: Configure for specific filetypes. For filetypes without
-" separate configuration, value `0` means disable rainbow color only for this
-" type of file. `default` means keep the default shim for this filetype.
+"                 separate configuration, value `0` means disable rainbow color only for this
+"                 type of file. `default` means keep the default shim for this filetype.
 " * `syn_name_prefix`: Add a prefix to the name of the syntax definition. This
-" option is used to resolve 3rd-party plugin compatibility issues.
+"                      option is used to resolve 3rd-party plugin compatibility issues.
 " * `after`: Execute some vim commands after the rainbow syntax definition.
-" Used to resolve 3rd-party plugin compatibility issues.
+"            Used to resolve 3rd-party plugin compatibility issues.
 " * Keep a field empty to use the default setting.
 "
 " For more advanced configuration samples, try searching with this tag:
@@ -101,7 +101,6 @@ Plug 'SirVer/ultisnips'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Automatically install the following extensions if they are not already installed:
 let g:coc_global_extensions=[
-            \ 'coc-actions',
             \ 'coc-css',
             \ 'coc-deno',
             \ 'coc-emoji',

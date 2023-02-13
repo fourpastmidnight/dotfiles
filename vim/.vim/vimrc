@@ -97,8 +97,13 @@ call s:SourceConfigFilesIn('rcplugins/qol.vim')
 Plug 'tpope/vim-dadbod'
 Plug 'vim-test/vim-test'
 
+" Per https://github.com/ryanoasis/vim-devicons, ALWAYS load this as the VERY LAST plugin.
+Plug 'ryanoasis/vim-devicons', { 'branch': 'origin/pr/446' }
+let g:WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
+" let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
+" let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['pn'] = nr2char(0xF0096)
 call plug#end()
-
+"let &rtp='~/.vim/plugged/potion,'.&rtp
 " note: don't need to set this. per help documentation, as soon as a user .vimrc
 " file is found, this is already set! this is not true when the system .vimrc
 " file is used, however.
@@ -116,7 +121,6 @@ set guicursor=
 set backspace=indent,eol,start
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab autoindent smartindent shiftround smarttab
 set foldcolumn=5
-set foldmethod=indent " fold based on indentation levels
 set textwidth=0
 " TODO: Perhaps make an autocmd for this so the column is only visible while in INSERT mode...
 "set colorcolumn=110
