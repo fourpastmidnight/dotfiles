@@ -58,12 +58,12 @@ endfunction
 "   Use '/a/directory/*' to get all configuration files in the directory /a/directory.
 "   Use '/a/directory/**' to get all configuration files in the directory /a/directory and any of its
 "     sub-directories.
-function! s:SourceConfigFilesIn(configFiles)
-    if a:configFiles !~? '\v\*(|\*|\..+)?'
-        let config_file = '$HOME/.vim/' . a:configFiles
+function! SourceConfigFilesIn(configFilePath)
+    if a:configFilePath !~? '\v\*(|\*|\..+)?'
+        let config_file = '$HOME/.vim/' . a:configFilePath
         execute 'source' config_file
     else
-        let config_files  = '$HOME/.vim/' . a:configFiles
+        let config_files  = '$HOME/.vim/' . a:configFilePath
         for config_file in split(glob(config_files), '\n')
             if filereadable(config_file)
                 execute 'source' config_file
@@ -84,15 +84,14 @@ endfunction
 iabbrev servcie service
 
 call plug#begin()
-call s:SourceConfigFilesIn('rcplugins/colorschemes.vim')
+call SourceConfigFilesIn('rcplugins/colorschemes.vim')
 " TODO: Figure out a way to declaratively specify 'load order'.
-call s:SourceConfigFilesIn('rcplugins/polyglot.vim')
-call s:SourceConfigFilesIn('rcplugins/formatting/*')
-call s:SourceConfigFilesIn('rcplugins/lang/*')
-call s:SourceConfigFilesIn('rcplugins/scm.vim')
-call s:SourceConfigFilesIn('rcplugins/ide.vim')
-call s:SourceConfigFilesIn('rcplugins/tmux.vim')
-call s:SourceConfigFilesIn('rcplugins/qol.vim')
+call SourceConfigFilesIn('rcplugins/lang.vim')
+call SourceConfigFilesIn('rcplugins/formatting/*')
+call SourceConfigFilesIn('rcplugins/scm.vim')
+call SourceConfigFilesIn('rcplugins/ide.vim')
+call SourceConfigFilesIn('rcplugins/tmux.vim')
+call SourceConfigFilesIn('rcplugins/qol.vim')
 
 Plug 'tpope/vim-dadbod'
 Plug 'vim-test/vim-test'
@@ -116,6 +115,7 @@ set cmdheight=1
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
+set guifont=CaskaydiaCove\ NF
 " Set the cursor -- TODO: Lookup more info on this
 set guicursor=
 set backspace=indent,eol,start
@@ -232,7 +232,7 @@ filetype plugin indent on " Indentation rules follow those of plug-ins, then fil
 syntax enable
 set background=dark
 "colorscheme spaceduck
-colorscheme base16-classic-dark
+colorscheme hybrid
 
 " Improve support for mouse use with mintty
 set mouse=a

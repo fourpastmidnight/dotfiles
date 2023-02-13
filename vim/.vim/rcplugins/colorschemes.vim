@@ -1,7 +1,5 @@
-Plug 'AlessandroYorba/Alduin'
 Plug 'ackyshake/Spacegray.vim'
 Plug 'aereal/vim-colors-japanesque'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'aliou/moriarty.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'arcticicestudio/nord-vim'
@@ -9,22 +7,23 @@ Plug 'artanikin/vim-synthwave84'
 Plug 'arzg/vim-corvine'
 Plug 'arzg/vim-substrata'
 Plug 'arzg/vim-colors-xcode'
+Plug 'ayu-theme/ayu-vim' " v
+let g:ayucolor="dark" " light, mirage, dark
 Plug 'balanceiskey/vim-framer-syntax'
 Plug 'betoissues/contrastneed-theme'
 Plug 'blackgate/tropikos-vim-theme'
 Plug 'blindFS/flattr.vim'
 Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'carakan/new-railscasts-theme'
-Plug 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
-Plug 'chriskempson/base16-vim'
+Plug 'challenger-deep-theme/vim', {'as': 'challenger-deep-theme'} " v
+Plug 'chriskempson/base16-vim' " v
 Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'cocopon/iceberg.vim'
+Plug 'cocopon/iceberg.vim' " v
 Plug 'croaker/mustang-vim'
 Plug 'cseelus/vim-colors-clearance'
-Plug 'cseelus/vim-colors-lucid'
+Plug 'cseelus/vim-colors-lucid' " v
 Plug 'cseelus/vim-colors-tone'
-Plug 'DankNeon/vim'
-Plug 'danilo-augusto/vim-afterglow'
+Plug 'danilo-augusto/vim-afterglow' " v
 Plug 'deathlyfrantic/vim-distill'
 Plug 'dikiaap/minimalist'
 Plug 'doums/darcula'
@@ -52,6 +51,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'kadekillary/Turtles'
 Plug 'koirand/tokyo-metro.vim'
 Plug 'lewis6991/moonlight.vim'
+Plug 'lifepillar/vim-gruvbox8'
 Plug 'lifepillar/vim-solarized8'
 Plug 'lifepillar/vim-wwdc16-theme'
 Plug 'Lokaltog/vim-distinguished'
@@ -61,7 +61,7 @@ Plug 'maksimr/Lucius2'
 Plug 'mhartington/oceanic-next'
 Plug 'mkarmona/colorsbox'
 Plug 'morhetz/gruvbox'
-Plug 'nanotech/jellybeans.vim'
+Plug 'nanotech/jellybeans.vim' " v
 Plug 'nightsense/carbonized'
 Plug 'nightsense/cosmic_latte'
 Plug 'nightsense/forgotten'
@@ -79,9 +79,10 @@ Plug 'notpratheek/vim-luna'
 Plug 'oguzbilgic/sexy-railscasts-theme'
 Plug 'orthecreedence/void.vim'
 Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
-Plug 'quantum-omega/vim-burnttoast256', { 'name': 'burnttoast256' }
+Plug 'quantum-omega/vim-burnttoast256', { 'as': 'burnttoast256' }
 Plug 'Rigellute/rigel'
 Plug 'rafalbromirski/vim-aurora'
+Plug 'rainglow/vim', { 'as': 'rainglow' }
 Plug 'rakr/vim-one'
 Plug 'ratazzi/blackboard.vim'
 Plug 'relastle/bluewery.vim'
@@ -97,14 +98,13 @@ Plug 'shapeoflambda/dark-purple.vim'
 Plug 'stulzer/heroku-colorscheme'
 Plug 'tpope/vim-vividchalk'
 Plug 'trusktr/seti.vim'
-Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'tyrannicaltoucan/vim-deep-space', " v
 Plug 'vim-scripts/moria'
 Plug 'vim-scripts/obsidian2.vim'
 Plug 'vim-scripts/strange'
 Plug 'vim-scripts/synic.vim'
 Plug 'vim-scripts/twilight256.vim'
 Plug 'vim-scripts/vilight.vim'
-Plug 'w0ng/vim-hybrid'
-Plug 'wadackel/vim-dogrun', { 'branch': 'main' }
+Plug 'w0ng/vim-hybrid' " v
 Plug 'Zabanaa/neuromancer.vim'
 

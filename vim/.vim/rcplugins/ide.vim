@@ -4,6 +4,50 @@
 
 Plug 'bash-lsp/bash-language-server'
 
+Plug 'dense-analysis/ale'
+" To continue to use CoC as the LSP server, set this to 1
+let g:ale_disable_lsp = 1
+" To have ALE work with Coc, use :CocConfig and add the following to your
+" coc.settings file:
+"
+"    "diagnastic.displayByAle": true
+
+" TODO: Most of ALE's features have been disabled until I try them out and/or
+" configure them for specific languages.
+
+" For ALE to use OmniSharp as a C# linter:
+"let g:ale_linters = { 'cs: ['OmniSharp'] } - OR
+"let b:ale_linters = ['OmniSHarp' ] in a ftplugin for CSharp files.
+
+" By default, ALE attempts to provide linting for any/all supported files. You
+" can override this with a global list or a buffer-local list (either set via
+" commmand-mode or in a ftplugin(/after)? plugin.
+" The option below is a boolean that enables/disables explicit linters. Set to
+" 0 for the default behavior.
+let g:ale_linters_explicit = 1
+
+" Keep the sign gutter open always--don't know why ALE decides to "override"
+" this...
+let g:ale_sign_column_always = 1
+
+" Set the error/warning icons to use
+let g:ale_sign_error = "\uF057"
+let g:ale_sign_warning = "\uF071"
+
+" Integrate ALE with vim-airline.
+let g:airline#extensions#ale#enabled = 1
+
+" Configure linting only when you save
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0 " Disable linting upon first opening a file
+"
+" Disable linting on file save:
+let g:ale_lint_on_save = 0
+"
+" Disable warnings about trailing whitespace for files.
+let b:ale_warn_about_trailing_whitespace = 1
+
 Plug 'luochen1990/rainbow'
 " interface to be used in order listed
 " * `guis`: a list of `gui` (`:h highlight-gui`), used in order listed
@@ -76,8 +120,14 @@ let g:rainbow_conf = {
 Plug 'OmniSharp/omnisharp-vim'
 if IsWSL()
     let g:OmniSharp_translate_cygwin_wsl = 1
-    let g:OmniSharp_selector_ui = ''
 endif
+" Tell OminSharp to use the .NET 6 LS
+let g:OmniSharp_server_use_net6 = 1
+" Choose which code action selector UI will be used.
+" Valid values are fzf, clap, ctrlp, unite, or ''.
+let g:OmniSharp_selector_ui = ''
+" Tell OmniSharp to syntax highlight even in insert mode
+let g:OmniSharp_highlighting = 2
 
 " Becasue this plugin is installed on all platforms, and the conditionals are only controlling how the
 " post-install hooks are run, no need to 'conditionally load' this plugin.
@@ -159,3 +209,5 @@ let g:vimspector_enable_mappings='human'
 let g:vimspector_base_dir=$HOME."/.vim/plugged/vimspector"
 
 Plug 'tpope/vim-commentary'
+Plug 'tpop/vim-dotenv'
+Plug 'tpope/vim-ragtag'

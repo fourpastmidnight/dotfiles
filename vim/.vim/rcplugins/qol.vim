@@ -109,7 +109,7 @@ let g:airline#extensions#whitespace#enabled = 1
 let g:airline_left_sep = "\uE0B0"
 let g:airline_right_sep = "\uE0B2"
 "let g:airline_theme = 'spaceduck'
-let g:airline_theme = 'base16_classic_dark'
+let g:airline_theme = 'hybrid'
 let g:airline_skip_empty_sections = 1
 function! AirlineInit()
   let g:airline_symbols.branch = "\uF418"
