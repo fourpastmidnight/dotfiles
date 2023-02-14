@@ -1,101 +1,70 @@
 Plug 'ackyshake/Spacegray.vim'
-Plug 'aereal/vim-colors-japanesque'
+Plug 'AlessandroYorba/Sierra'
+"let g:sierra_Midnight = 1
+let g:sierra_Pitch = 1
 Plug 'aliou/moriarty.vim'
-Plug 'altercation/vim-colors-solarized'
-Plug 'arcticicestudio/nord-vim'
-Plug 'artanikin/vim-synthwave84'
-Plug 'arzg/vim-corvine'
+Plug 'arcticicestudio/nord-vim' " Needs tweaking
 Plug 'arzg/vim-substrata'
-Plug 'arzg/vim-colors-xcode'
-Plug 'ayu-theme/ayu-vim' " v
+Plug 'ayu-theme/ayu-vim'
 let g:ayucolor="dark" " light, mirage, dark
-Plug 'balanceiskey/vim-framer-syntax'
-Plug 'betoissues/contrastneed-theme'
-Plug 'blackgate/tropikos-vim-theme'
-Plug 'blindFS/flattr.vim'
 Plug 'bluz71/vim-nightfly-guicolors'
-Plug 'carakan/new-railscasts-theme'
-Plug 'challenger-deep-theme/vim', {'as': 'challenger-deep-theme'} " v
-Plug 'chriskempson/base16-vim' " v
+Plug 'challenger-deep-theme/vim', {'as': 'challenger-deep-theme'}
+Plug 'chriskempson/base16-vim'
 Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'cocopon/iceberg.vim' " v
-Plug 'croaker/mustang-vim'
-Plug 'cseelus/vim-colors-clearance'
-Plug 'cseelus/vim-colors-lucid' " v
+Plug 'cocopon/iceberg.vim'
+Plug 'cseelus/vim-colors-lucid'
 Plug 'cseelus/vim-colors-tone'
-Plug 'danilo-augusto/vim-afterglow' " v
-Plug 'deathlyfrantic/vim-distill'
-Plug 'dikiaap/minimalist'
-Plug 'doums/darcula'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'dunckr/vim-monokai-soda'
-Plug 'duythinht/vim-coffee'
+Plug 'danilo-augusto/vim-afterglow'
+Plug 'drewtempelmeyer/palenight.vim' " Make the background darker
 Plug 'EdenEast/nightfox.nvim'
 Plug 'eemed/sitruuna.vim'
 Plug 'ehartc/Spink'
-Plug 'encody/nvim'
 Plug 'fcevado/molokai_dark'
-Plug 'flazz/vim-colorschemes'
+Plug 'flazz/vim-colorschemes' " ??
 Plug 'flrnd/plastic.vim'
-Plug 'franbach/miramare'
-Plug 'gilsondev/lizard'
-Plug 'glortho/feral-vim'
-Plug 'gummesson/stereokai.vim'
+Plug 'fmoralesc/molokayo'
+Plug 'fourpastmidnight/seabird', { 'branch': 'no-hardcoded-background' } " Need to update the seagull theme to use a dark background
+augroup colorscheme_seagull
+  autocmd!
+  autocmd Colorscheme seagull hi Normal ctermbg=0
+        \ | set background=dark
+        \ | hi Normal guibg=#202020
+augroup END
 Plug 'haishanh/night-owl.vim'
-Plug 'J4CKR3D/Hypsteria'
-Plug 'jacoborus/tender.vim'
-Plug 'jansenfuller/crayon'
-Plug 'jaredgorski/SpaceCamp'
-Plug 'jdsimcoe/panic.vim'
-Plug 'joshdick/onedark.vim'
 Plug 'kadekillary/Turtles'
 Plug 'koirand/tokyo-metro.vim'
-Plug 'lewis6991/moonlight.vim'
-Plug 'lifepillar/vim-gruvbox8'
-Plug 'lifepillar/vim-solarized8'
 Plug 'lifepillar/vim-wwdc16-theme'
 Plug 'Lokaltog/vim-distinguished'
-Plug 'lucasprag/simpleblack'
 Plug 'Marfisc/vorange'
 Plug 'maksimr/Lucius2'
-Plug 'mhartington/oceanic-next'
-Plug 'mkarmona/colorsbox'
-Plug 'morhetz/gruvbox'
-Plug 'nanotech/jellybeans.vim' " v
-Plug 'nightsense/carbonized'
-Plug 'nightsense/cosmic_latte'
-Plug 'nightsense/forgotten'
+Plug 'mhartington/oceanic-next' " Needs tweeeaking
+Plug 'mkarmona/colorsbox' " colorsbox-stbright, colorsbox-stnight
+Plug 'nanotech/jellybeans.vim'
 Plug 'nightsense/nemo'
 Plug 'nightsense/stellarized'
-Plug 'nightsense/seabird'
 Plug 'nightsense/seagrey'
-Plug 'nightsense/snow'
-Plug 'nightsense/strawberry'
-Plug 'nightsense/vimspectr'
-Plug 'nightsense/vrunchbang'
 Plug 'nn1ks/vim-darkspace'
 Plug 'noahfrederick/vim-hemisu'
-Plug 'notpratheek/vim-luna'
-Plug 'oguzbilgic/sexy-railscasts-theme'
-Plug 'orthecreedence/void.vim'
 Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
-Plug 'quantum-omega/vim-burnttoast256', { 'as': 'burnttoast256' }
-Plug 'Rigellute/rigel'
-Plug 'rafalbromirski/vim-aurora'
 Plug 'rainglow/vim', { 'as': 'rainglow' }
-Plug 'rakr/vim-one'
 Plug 'ratazzi/blackboard.vim'
 Plug 'relastle/bluewery.vim'
 Plug 'rhysd/wallaby.vim'
+Plug 'sainnhe/gruvbox-material'
+let g:gruvbox_material_background='hard'
+let g:gruvbox_material_foreground='original'
 Plug 'scottymoon/vim-chalkboard'
 Plug 'scottymoon/vim-twilight'
 Plug 'sherifkandeel/vim-colors'
 Plug 'sickill/vim-monokai'
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'srcery-colors/srcery-vim'
-Plug 'tomasr/molokai'
 Plug 'shapeoflambda/dark-purple.vim'
 Plug 'stulzer/heroku-colorscheme'
+Plug 'tomasr/molokai' " v
+" Trust me, you don't want the original.
+let g:molokai_original = 0
+" Add 24-bit treminal color support
+let g:rehash256 = 1
 Plug 'tpope/vim-vividchalk'
 Plug 'trusktr/seti.vim'
 Plug 'tyrannicaltoucan/vim-deep-space', " v
