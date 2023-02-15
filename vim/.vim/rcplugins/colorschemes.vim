@@ -32,6 +32,9 @@ augroup colorscheme_seagull
 augroup END
 Plug 'haishanh/night-owl.vim'
 Plug 'kadekillary/Turtles'
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+let g:material_theme_style = 'darker'
+let g:material_theme_italics = 1
 Plug 'koirand/tokyo-metro.vim'
 Plug 'lifepillar/vim-wwdc16-theme'
 Plug 'Lokaltog/vim-distinguished'
@@ -47,13 +50,11 @@ Plug 'nn1ks/vim-darkspace'
 Plug 'noahfrederick/vim-hemisu'
 Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 Plug 'rainglow/vim', { 'as': 'rainglow' }
-Plug 'ratazzi/blackboard.vim'
 Plug 'relastle/bluewery.vim'
 Plug 'rhysd/wallaby.vim'
 Plug 'sainnhe/gruvbox-material'
 let g:gruvbox_material_background='hard'
 let g:gruvbox_material_foreground='original'
-Plug 'scottymoon/vim-chalkboard'
 Plug 'scottymoon/vim-twilight'
 Plug 'sherifkandeel/vim-colors'
 Plug 'sickill/vim-monokai'
@@ -71,9 +72,6 @@ Plug 'tyrannicaltoucan/vim-deep-space', " v
 Plug 'vim-scripts/moria'
 Plug 'vim-scripts/obsidian2.vim'
 Plug 'vim-scripts/strange'
-Plug 'vim-scripts/synic.vim'
 Plug 'vim-scripts/twilight256.vim'
-Plug 'vim-scripts/vilight.vim'
 Plug 'w0ng/vim-hybrid' " v
-Plug 'Zabanaa/neuromancer.vim'
 
