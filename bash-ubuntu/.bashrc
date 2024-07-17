@@ -24,6 +24,14 @@ HISTFILESIZE=2000
 shopt -s checkwinsize
 set -o vi
 
+#EDITOR=/usr/local/bin/vim
+EDITOR=/usr/bin/vim
+#alias vim=/usr/local/bin/vim
+alias vim=/usr/bin/vim
+
+# Apparently, Ubuntu doesn't like to follow POSIX standards and decides not to set TMPDIR :/
+export TMPDIR=/tmp
+
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
@@ -140,10 +148,14 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
 
+if [ -d '$HOME/.local/bin' ]; then
+    PATH="$PATH:$HOME/.local/bin"
+fi
+
 # TODO: Create an update function for nvm
 # TODO: It should check to see if the latest tag's sha1 == HEAD, and if not, prompt to update.
 
-export TERM=xterm-24bit
+#export TERM=xterm-24bit
 # Some character definitions for various markers about branch state.
 #MAX_CONFLICTED_FILES=0
 #DELTA_CHAR="△"
@@ -278,3 +290,5 @@ fi
 #PROMPT_COMMAND='__git_ps1 "\n$(tput setaf 170)$MSYSTEM $(tput setaf 34)\u@\h\n$(tput setaf 15)PWD: $(tput setaf 111)\w$(tput sgr0)" "\n\\\$ " "\n$(tput setaf 15)GIT:$(tput sgr0) %s$(tput sgr0)"'
 PROMPT_COMMAND='__sh_ps1 "uzhwv" "\n$(tput setaf 15)GIT:$(tput sgr0) %s$(tput sgr0)" "bash: \w"'
 #PROMPT_COMMAND='__sh_ps1 "" "\n$(tput setaf 15)GIT:$(tput sgr0) %s$(tput sgr0)"'
+
+complete -C /usr/bin/terraform terraform
