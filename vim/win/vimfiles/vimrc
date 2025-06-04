@@ -1,0 +1,489 @@
+let data_dir = has('nvim') ? stdpath('data') . '/site' : "$HOME/vimfiles"
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    silent execute '!curl -fLo '.data_dir.'/autoload/plugin.vim --create-dirs https://raw.githubusercontent.junegunn/vim-plug/master/plug.vim'
+endif
+
+call plug#begin()
+
+" Let vim-plug manage vim-plug
+Plug 'junegunn/vim-plug'
+
+" Themes
+Plug 'AlessandroYorba/Alduin'
+Plug 'ackyshake/Spacegray.vim'
+Plug 'aereal/vim-colors-japanesque'
+Plug 'ayu-theme/ayu-vim'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'aliou/moriarty.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'arcticicestudio/nord-vim'
+Plug 'artanikin/vim-synthwave84'
+Plug 'arzg/vim-corvine'
+Plug 'arzg/vim-substrata'
+Plug 'arzg/vim-colors-xcode'
+Plug 'balanceiskey/vim-framer-syntax'
+Plug 'betoissues/contrastneed-theme'
+Plug 'blackgate/tropikos-vim-theme'
+Plug 'blindFS/flattr.vim'
+Plug 'bluz71/vim-nightfly-guicolors'
+Plug 'carakan/new-railscasts-theme'
+Plug 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
+Plug 'chriskempson/base16-vim'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'cocopon/iceberg.vim'
+Plug 'croaker/mustang-vim'
+Plug 'cseelus/vim-colors-clearance'
+Plug 'cseelus/vim-colors-lucid'
+Plug 'cseelus/vim-colors-tone'
+Plug 'DankNeon/vim'
+Plug 'danilo-augusto/vim-afterglow'
+Plug 'deathlyfrantic/vim-distill'
+Plug 'dikiaap/minimalist'
+Plug 'doums/darcula'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'dunckr/vim-monokai-soda'
+Plug 'duythinht/vim-coffee'
+Plug 'eemed/sitruuna.vim'
+Plug 'ehartc/Spink'
+Plug 'encody/nvim'
+Plug 'fcevado/molokai_dark'
+Plug 'flazz/vim-colorschemes'
+Plug 'flrnd/plastic.vim'
+Plug 'franbach/miramare'
+Plug 'gilsondev/lizard'
+Plug 'glortho/feral-vim'
+Plug 'gummesson/stereokai.vim'
+Plug 'haishanh/night-owl.vim'
+Plug 'J4CKR3D/Hypsteria'
+Plug 'jacoborus/tender.vim'
+Plug 'jansenfuller/crayon'
+Plug 'jaredgorski/SpaceCamp'
+Plug 'jdsimcoe/panic.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'kadekillary/Turtles'
+Plug 'koirand/tokyo-metro.vim'
+Plug 'lewis6991/moonlight.vim'
+Plug 'lifepillar/vim-solarized8'
+Plug 'lifepillar/vim-wwdc16-theme'
+Plug 'Lokaltog/vim-distinguished'
+Plug 'lucasprag/simpleblack'
+Plug 'Marfisc/vorange'
+Plug 'maksimr/Lucius2'
+Plug 'mhartington/oceanic-next'
+Plug 'mkarmona/colorsbox'
+Plug 'morhetz/gruvbox'
+Plug 'nanotech/jellybeans.vim'
+Plug 'nightsense/carbonized'
+Plug 'nightsense/cosmic_latte'
+Plug 'nightsense/forgotten'
+Plug 'nightsense/nemo'
+Plug 'nightsense/stellarized'
+Plug 'nightsense/seabird'
+Plug 'nightsense/seagrey'
+Plug 'nightsense/snow'
+Plug 'nightsense/strawberry'
+Plug 'nightsense/vimspectr'
+Plug 'nightsense/vrunchbang'
+Plug 'nn1ks/vim-darkspace'
+Plug 'noahfrederick/vim-hemisu'
+Plug 'notpratheek/vim-luna'
+Plug 'oguzbilgic/sexy-railscasts-theme'
+Plug 'orthecreedence/void.vim'
+Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+Plug 'quantum-omega/vim-burnttoast256', { 'name': 'burnttoast256' }
+Plug 'Rigellute/rigel'
+Plug 'rafalbromirski/vim-aurora'
+Plug 'rakr/vim-one'
+Plug 'ratazzi/blackboard.vim'
+Plug 'relastle/bluewery.vim'
+Plug 'rhysd/wallaby.vim'
+Plug 'scottymoon/vim-chalkboard'
+Plug 'scottymoon/vim-twilight'
+Plug 'sherifkandeel/vim-colors'
+Plug 'sickill/vim-monokai'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'srcery-colors/srcery-vim'
+Plug 'tomasr/molokai'
+Plug 'shapeoflambda/dark-purple.vim'
+Plug 'stulzer/heroku-colorscheme'
+Plug 'tpope/vim-vividchalk'
+Plug 'trusktr/seti.vim'
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'vim-scripts/moria'
+Plug 'vim-scripts/obsidian2.vim'
+Plug 'vim-scripts/strange'
+Plug 'vim-scripts/synic.vim'
+Plug 'vim-scripts/twilight256.vim'
+Plug 'vim-scripts/vilight.vim'
+Plug 'w0ng/vim-hybrid'
+Plug 'wadackel/vim-dogrun', { 'branch': 'main' }
+Plug 'Zabanaa/neuromancer.vim'
+
+
+"" Filetype Plugins
+"Plug 'Jorengarenar/vim-SQL-UPPER'
+"" Configure vim-SQL-UPPER plugin
+"let g:SQL_UPPER = 5
+
+"" Syntax Plugs
+"Plug 'othree/html5.vim'
+"Plug 'hail2u/vim-css3-syntax'
+"Plug 'cakebaker/scss-syntax.vim'
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+" Configure vim-javascript
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1
+"map <LEADER>c :exec &conceallevel ? 'set conceallevel=0' : 'set conceallevel=1'<CR>
+"Plug 'sheerun/vim-polyglot'
+
+"" Utility Plugs
+Plug 'chrisbra/csv.vim'
+"Plug 'christoomey/vim-conflicted'
+Plug 'easymotion/vim-easymotion'
+"Plug 'editorconfig/editorconfig-vim'
+"Plug 'ekalinin/Dockerfile.vim'
+"Plug 'elzr/vim-json', { 'for': ['json', 'jsonp'] }
+"Plug 'enricobacis/vim-airline-clock'
+""Plug 'ervandew/supertab'
+"Plug 'fholgado/minibufexpl.vim'
+"Plug 'fsharp/vim-fsharp', { 'for': 'fsharp' }
+Plug 'godlygeek/tabular'
+"Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx' ], 'do': 'make clean && make install' }
+"Plug 'idanarye/vim-merginal'
+"Plug 'iloginow/vim-stylus', { 'for': ['stylus','css'] }
+"Plug 'iloginow/vim-javascript'
+"Plug 'ionide/Ionide-vim', { 'do': 'powershell -ExecutionPolicy Unrestricted .\\install.ps1', 'for': 'fsharp' }
+"Plug 'jason0x43/vim-js-indent'
+"Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+"Plug 'leafgarland/typescript-vim'
+"Plug 'lifepillar/vim-colortemplate'
+Plug 'luochen1990/rainbow'
+" interface to be used in order listed
+" * `guis`: a list of `gui` (`:h highlight-gui`), used in order listed
+" * `ctermfgs`: a list of `ctermfg` (`:h highlight-ctermfg`)
+" * `cterms`: a list of `cterm` (`:h highlight-cterm`)
+" * `operators`: describe the operators you want to highlight. (NOTE: be
+" careful about special characters which need escaping; you can find more
+" examples [here](https://github.com/luochen/1990/rainbow/issues3), and you
+" can also read the [vim help about
+" syn-pattern](https://vimdoc.sourceforge.net/htmldoct/syntax.html#.syn-pattern).
+" Note that this option will be overwritten by the `step` part of
+" `parentheses`.
+" * `paretheses`: A list of parentheses definitions. A paretheses definition
+" contains parts like `start=/(/`, `step=/,/`, `stop=/)/`, `fold`,
+" `contained`,     `containedin=someSynNames`, `contains=@Spell`. See `:h syntax`
+" for more details. Note that the `step` part is defined by this plugin and so
+" it is not described by the official vim documentation.
+" * `parentheses_options`: options shared between different paretheses; things
+" like `containedin=xxxFuncBody`, `contains=@Spell` (or `contains=@NoSpell`)
+" ofter appear here. This option is often used to resolve 3rd-party plugin
+" compatibility issues.
+" * `separately`: Configure for specific filetypes. For filetypes without
+" separate configuration, value `0` means disable rainbow color only for this
+" type of file. `default` means keep the default shim for this filetype.
+" * `syn_name_prefix`: Add a prefix to the name of the syntax definition. This
+" option is used to resolve 3rd-party plugin compatibility issues.
+" * `after`: Execute some vim commands after the rainbow syntax definition.
+" Used to resolve 3rd-party plugin compatibility issues.
+" * Keep a field empty to use the default setting.
+"
+" For more advanced configuration samples, try searching with this tag:
+" http://github.com/luochen1990/rainbow/issues?utf8=y&q=label%3A"config+reference"+.
+let g:rainbow_conf = {
+\    'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+\    'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+\    'guis': [''],
+\    'cterms': [''],
+\    'operators': '_,_',
+\    'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\    'separately': {
+\         '*': {},
+\         'markdown': {
+\             'parentheses_options': 'containedin-markdownCode contained'
+\         },
+\         'lisp': {
+\             'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3']
+\         },
+\         'haskell': {
+\             'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/\v\{\ze[^-]/ end=/}/ fold']
+\         },
+\         'vim': {
+\             'parentheses_options': 'containedin=vimFuncBody'
+\         },
+\         'perl': {
+\             'syn_name_prefix': 'perlBlockFoldRainbow'
+\         },
+\         'stylus': {
+\             'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup']
+\         },
+\         'typescript': {
+\             'parentheses': ['start=/{/ end=/}// fold contains=@colorableGroup', 'start=/(/ end=/)/', 'start=/\[/ end=l\]/']
+\         }
+\    }
+\}
+Plug 'MattesGroeger/vim-bookmarks'
+"Plug 'mattn/emmet-vim'
+"let g:user_emmet_leader_key='<Tab>'
+"let g:user_emmet_settings = { 'javascript.jsx': { 'extends': 'jsx' } }
+"Plug 'mhartington/vim-typings', { 'for': ['typescript', 'javascript'] }
+"Plug 'mhinz/vim-signify'
+"Plug 'mhinz/vim-startify'
+"Plug 'mxw/vim-jsx'
+"Plug 'OmniSharp/omnisharp-vim'
+"Plug 'peitalin/vim-jsx-typescript'
+"Plug 'pprovost/vim-ps1'   " Included in sheerun/ployglot
+Plug 'preservim/vim-markdown', { 'for': 'markdown' }
+" Configure the vim_markdown plugin
+let g:markdown_fenced_languages = ['html', 'javascript', 'typescript', 'powershell=ps1', 'c#', 'f#', 'css', 'scss', 'less', 'bash=sh', 'conf', 'json', 'toml', 'yaml']
+let g:vim_markdown_fenced_languages = ['html', 'javascript', 'typescript', 'powershell=ps1', 'c#', 'f#', 'css', 'scss', 'less', 'bash=sh', 'conf', 'help', 'json', 'toml', 'vim', 'yaml']
+let g:markdown_syntax_conceal = 1
+let g:vim_markdown_conceal = 1
+let g:vim_markdown_conceal_code_blocks = 1
+let g:vim_markdown_folding_disabled = 0
+let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_math = 1
+let g:vim_markdown_no_default_keyMappings = 0
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_no_extensions_in_markdown = 1
+let g:vim_markdown_edit_url_in = 'current'  " Supported values: tab, vsplit, hsplit, current
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'preservim/nerdcommenter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+"Plug 'Quramy/tsuquyomi', { 'for': ['typescript', 'javascript'] }
+"Plug 'Quramy/vim-dtsm'
+"Plug 'Quramy/vim-js-pretty-template'
+if has('win32')
+    Plug 'Shougo/vimproc.vim', { 'branch': 'master', 'do': 'curl -o C:\Users\cshea\.vim\plugged\vimproc.vim\lib\vimproc_win64.dll https://github.com/Shougo/vimproc.vim/releases/latest/download/vimproc_win64.dll' }
+elseif has('win32unix') 
+    Plug 'Shougo/vimproc.vim', { 'branch': 'master', 'do': 'curl -o /c/Users/cshea/.vim/plugged/vimproc.vim/lib/vimproc_win64.dll https://github.com/Shougo/vimproc.vim/releases/latest/download/vimproc_win64.dll' }
+endif
+
+if has('nvim')
+    Plug 'Shougo/ddc.vim'
+    Plug 'vim-denops/denops.vim'
+else
+    Plug 'Shougo/ddc.vim'
+    Plug 'vim-denops/denops.vim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+Plug 'simeji/winresizer'
+let g:winresizer_gui_enable = 1
+"Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'tpope/vim-characterize'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-cucumber'
+Plug 'tpope/vim-dadbod'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-dotenv'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim' " Depends on vim-fugitive above.
+Plug 'idanarye/vim-merginal' " Depends on vim-fugitive, and on windows, vimproc.vim
+Plug 'christoomey/vim-conflicted' " Depends on vim-fugitive
+Plug 'tpope/vim-jdaddy'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-scriptease'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
+if has('win32') || has('unixwin32')
+    let g:gitgutter_git_executable = '/c/Program\ Files/Git/bin/git.exe'
+elseif has('unix')
+    let g:gitgutter_git_executable = '/usr/bin/git'
+endif
+Plug 'ryanoasis/vim-devicons'
+
+Plug 'ap/vim-css-color'
+Plug 'rhysd/committia.vim'
+Plug 'lambdalisue/gina.vim'
+
+"let g:airline_theme = 'spaceduck'
+let g:airline_theme = 'ayu_dark'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+" %a = 3-letter day-of-week
+" %A = full day-of-week
+" %w = number of day of week, 0-6, 0 = Sunday
+" %y = two-digit year
+" %Y = four-digit year
+" %b = 3-lettr month
+" %B = full month
+" %m = month number, 01..12
+" %d = day number, 01..31
+" %e = no leading zero day number: 1..31
+" %l = no-leading zero hour
+" %H = 24-hour hour, 00..23
+" %I = 12-hour hour, 01..12
+" %M = minutes, 00..59
+" %S = seconds, 00..60
+" %p = AM/PM indicator
+" %Z = TimeZone offset, e.g. +08
+" %j = day-of-year, 001..366
+" %% = literal '%'
+let g:airline#extensions#clock#format = '%a %e %b %Y %H:%M'
+let g:airline_powerline_fonts = 1
+"let g:airline_left_sep = '\uE0B0'
+"let g:airline_right_sep = '\uE0B6'
+function! AirlineInit()
+  let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
+endfunction
+let g:airline_skip_empty_sections = 1
+"Plug 'vim-scripts/taglist.vim'
+"Plug 'vim-syntastic/syntastic'
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_typescriptreact_checkers = ['tsuquyomi']
+"let g:syntastic_typescript_checkers = ['tsuquyomi']
+"Plug 'vim-test/vim-test'
+
+" TypeScript/JavaScript plugins and their configuration
+Plug 'yuezk/vim-js', { 'for': ['javascript','javascriptreact'] }
+Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript','typescriptreact'] }
+Plug 'maxmellon/vim-jsx-pretty', { 'for': ['typescript','typescriptreact'] }
+
+Plug 'bash-lsp/bash-language-server'
+Plug 'SirVer/ultisnips'
+
+" COC - Conqueror of Completion
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" Automatically install the following extensions if they are not already installed:
+let g:coc_global_extensions=[
+            \ 'coc-css',
+            \ 'coc-emoji',
+            \ 'coc-eslint',
+            \ 'coc-html',
+            \ 'coc-omni',
+            \ 'coc-powershell',
+            \ 'coc-snippets',
+            \ 'coc-svg',
+            \ 'coc-tag',
+            \ 'coc-tsserver',
+            \ 'coc-ultisnips',
+            \ 'coc-vimlsp',
+            \ 'coc-xml',
+            \ 'coc-yaml'
+            \]
+"            \ 'coc-snippets',
+"if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+"    let g:coc_global_extensions += ['coc-prettier']
+"endif
+"if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+"    let g:coc_global_extensions += ['coc-eslint']
+"endif
+Plug 'puremourning/vimspector'
+let g:vimspector_enable_mappings='HUMAN'
+let g:vimspector_base_dir=$HOME."/.vim/plugged/vimspector"
+
+call plug#end()
+
+" NOTE: Don't need to set this. Per help documentation, as soon as a user .vimrc
+" file is found, this is already set! This is NOT true when the system .vimrc
+" file is used, however.
+"set nocompatible
+
+" If there's a .vimrc file in the directory in which Vim is opened, source it.
+set exrc
+set showmode
+set cmdheight=1
+" Set the cursor -- TODO: Lookup more info on this
+"set guicursor=
+set backspace=indent,eol,start
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab autoindent smartindent
+set foldcolumn=5
+set textwidth=0
+set number relativenumber
+set signcolumn=yes
+set hidden
+set noerrorbells
+set path+=**
+set wildmenu
+set hlsearch
+set incsearch
+" Start scrolling the screen when the cursor reaches 'n' lines from the top/bottom
+set scrolloff=8
+" When :split-ting a window, put the new window below the current window
+set splitbelow
+" When :vsplit-ting a window, put the new window to the right of the current window
+set splitright
+" Set completion mode options (think, intellisense menu)
+" My options are:
+"  - menuone: Show a menu even for a single match
+"  - noinsert: Do not insert any text until a selection is actually made
+"  - noselect: Do not 'auto-select' a match--user has to explicitly select
+set completeopt=menuone,noinsert,noselect
+" Set update time.
+" The default is 4s!! Reduce it to at least 100ms
+set updatetime=100
+" Avoid some 'hit-enter' prompts
+set shortmess=filmnrxoOc
+" Start diff mode using vertical splits, in addition to the default values
+set diffopt+=vertical
+
+" Change the characters that are used for showing whitespace
+set listchars="tab:\uF811\uF811,trail:\uB7,nbsp:\u2420,lead:\uB7,space:\uB7,precedes:\u2026,extends:\u2026"
+
+
+let $RTP=split(&runtimepath, ',')[0]
+
+if (has("termguicolors"))
+    set termguicolors
+endif
+
+filetype plugin on
+syntax enable
+set background=dark
+"colorscheme spaceduck
+let ayucolor="dark"
+colorscheme ayu
+
+"let g:lightline = { 'colorscheme': 'spaceduck' }
+
+" Improve support for mouse use with mintty
+set mouse=a
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
+
+" Override git-for-windows setting clipboard=unnamed causing
+" the system clipboard to clobber the default unnamed register
+if has("clipboard")
+    set clipboard=
+endif
+
+" Only show line highlighting when in INSERT mode.
+augroup fourpastmidnight_vimrc
+  autocmd!
+  autocmd BufEnter * setlocal cursorline
+  autocmd BufEnter * setlocal colorcolumn=110
+  autocmd BufLeave * setlocal nocursorline
+  autocmd BufLeave * setlocal colorcolumn=0
+  "autocmd BufRead,BufNewFile *.[jt]sx? set conceallevel=1
+  autocmd BufRead,BufNewFile *.{md,mdx,mdown,mkd,mkdn,markdown,mdwn} set conceallevel=2 
+  autocmd FileType javascript setlocal foldmethod=syntax
+  autocmd FileType javascriptreact setlocal foldmethod=syntax
+  autocmd FileType typescript setlocal foldmethod=syntax
+  autocmd FileType typescriptreact setlocal foldmethod=syntax
+  autocmd VimEnter * call AirlineInit()
+augroup END

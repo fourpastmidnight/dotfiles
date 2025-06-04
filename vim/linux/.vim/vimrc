@@ -12,6 +12,7 @@ Plug 'junegunn/vim-plug'
 Plug 'AlessandroYorba/Alduin'
 Plug 'ackyshake/Spacegray.vim'
 Plug 'aereal/vim-colors-japanesque'
+Plug 'ayu-theme/ayu-vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'aliou/moriarty.vim'
 Plug 'altercation/vim-colors-solarized'
@@ -319,7 +320,8 @@ Plug 'ap/vim-css-color'
 Plug 'rhysd/committia.vim'
 Plug 'lambdalisue/gina.vim'
 
-let g:airline_theme = 'spaceduck'
+"let g:airline_theme = 'spaceduck'
+let g:airline_theme = 'ayu_dark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 " %a = 3-letter day-of-week
@@ -456,7 +458,9 @@ endif
 filetype plugin on
 syntax enable
 set background=dark
-colorscheme spaceduck
+"colorscheme spaceduck
+let ayucolor='dark'
+colorscheme ayu
 
 "let g:lightline = { 'colorscheme': 'spaceduck' }
 
