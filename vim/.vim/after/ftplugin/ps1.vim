@@ -1,1 +1,0 @@
-set suffixesadd+=.ps1
