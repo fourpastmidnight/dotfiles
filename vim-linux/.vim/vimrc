@@ -10,7 +10,7 @@ Plug 'junegunn/vim-plug'
 
 " Themes
 Plug 'AlessandroYorba/Alduin'
-Plug 'ackyshake/Spacegray.vim'
+Plug 'vim-scripts/Spacegray.vim'
 Plug 'aereal/vim-colors-japanesque'
 Plug 'ayu-theme/ayu-vim'
 Plug 'vim-airline/vim-airline-themes'
@@ -43,7 +43,7 @@ Plug 'doums/darcula'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'dunckr/vim-monokai-soda'
 Plug 'duythinht/vim-coffee'
-Plug 'eemed/sitruuna.vim'
+Plug 'haze/sitruuna.vim'
 Plug 'ehartc/Spink'
 Plug 'encody/nvim'
 Plug 'fcevado/molokai_dark'
@@ -76,14 +76,14 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'nightsense/carbonized'
 Plug 'nightsense/cosmic_latte'
 Plug 'nightsense/forgotten'
-Plug 'nightsense/nemo'
+Plug 'rmdashrfv/nemo'
 Plug 'nightsense/stellarized'
 Plug 'nightsense/seabird'
 Plug 'nightsense/seagrey'
 Plug 'nightsense/snow'
 Plug 'nightsense/strawberry'
 Plug 'nightsense/vimspectr'
-Plug 'nightsense/vrunchbang'
+Plug 'sp01010011/vrunchbang'
 Plug 'nn1ks/vim-darkspace'
 Plug 'noahfrederick/vim-hemisu'
 Plug 'notpratheek/vim-luna'
@@ -399,6 +399,17 @@ let g:vimspector_base_dir=$HOME."/.vim/plugged/vimspector"
 
 call plug#end()
 
+if has('wsl')
+    let g:is_wsl = 1
+elseif exists('$WSL_DISTRO_NAME')
+    let g:is_wsl = 1
+elseif filereadable('/proc/sys/kernel/osrelease')
+            \ && join(readfile('/proc/sys/kernel/osrelease')) =~? 'microsoft\|wsl'
+    let g:is_wsl = 1
+else
+    let g:is_wsl = 0
+endif
+
 " NOTE: Don't need to set this. Per help documentation, as soon as a user .vimrc
 " file is found, this is already set! This is NOT true when the system .vimrc
 " file is used, however.
@@ -475,7 +486,41 @@ end
 " Override git-for-windows setting clipboard=unnamed causing
 " the system clipboard to clobber the default unnamed register
 if has("clipboard")
-    set clipboard=
+    if g:is_wsl
+        if exists('$WAYLAND_DISPLAY') && executable('wl-copy') && executable('wl-paste')
+            " This doesn't clobber the windows clipboard on visual selection.
+            " If you want this behavior, then for 'copy.*', use this instead: 'wl-copy --foreground --primary --type text/plain',
+            let g:clipboard = {
+                        \   'name': 'wl-clipboard',
+                        \   'copy': {
+                        \       '+': 'wl-copy --foreground --type text/plain',
+                        \       '*': 'true',
+                        \   },
+                        \   'paste': {
+                        \       '+': 'wl-paste --no-newline',
+                        \       '*': 'wl-paste --no-newline --primary',
+                        \   },
+                        \   'cache_enabled': 0,
+                        \ }
+        elseif executable('clip.exe') && executable('powershell.exe')
+            " This doesn't clobber the windows clipboard on visual selection.
+            " If you want this behavior, then for 'copy.*', use this instead: 'iconv -f utf-8 -t utf-16-le | clip.exe',
+            let g:clipboard = {
+                        \         'name': 'WslClipboard',
+                        \         'copy': {
+                        \             '+': 'iconv -f utf-8 -t utf-16le | clip.exe',
+                        \             '*': 'true',
+                        \         },
+                        \         'paste': {
+                        \             '+': 'powershell.exe -NoProfile Get-Clipboard | iconv -f utf-16le -t utf-8',
+                        \             '*': 'powershell.exe -NoProfile Get-Clipboard | iconv -f utf-16le -t utf-8',
+                        \         },
+                        \         'cache-enabled': 0,
+                        \     }
+        endif
+    else
+        set clipboard=
+    endif
 endif
 
 " Only show line highlighting when in INSERT mode.
