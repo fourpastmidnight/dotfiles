@@ -98,6 +98,7 @@ alias l='ls -CF'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 alias more='less'
+export EDITOR=vim
 export PAGER=less
 export LESSOPEN='|/usr/bin/lesspipe.sh %s 2>&-'
                 # Use this if lesspipe.sh exists.
@@ -140,10 +141,39 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
 
+# For WSL, detect if a WSLg wayland-0 socket exists, and ensure that the WAYLAND_DISPLAY and XDG_RUNTIME_DIR environment avriables are set
+if [ -S "/run/user/$UID/wayland-0" ]; then
+    export XDG_RUNTIME_DIR="/run/user/$UID"
+    export WAYLAND_DISPLAY="wayland-0"
+elif [ -S "/var/run/$UID/wayland-0" ]; then
+    export XDG_RUNTIME_DIR="/var/run/user/$UID"
+    export WAYLAND_DISPLAY="wayland-0"
+elif [ -S "/mnt/wslg/runtime-dir/wayland-0" ]; then
+    # Fallback for older versions of WSL2 that don't symlink /mnt/wslg/runtime-dir to (/var)?/run/user/$UID
+    export XDG_RUNTIME_DIR="/mnt/wslg/runtime-dir"
+    export WAYLAND_DISPLAY="wayland-0"
+fi
+
+# Ensure that any running tmux sessions get the XDG_RUNTIME_DIR and WAYLAND_DISPLAY environment variables
+# into its global session state.
+if command -v tmux >/dev/null && tmux info &>/dev/null; then
+    tmux set-environment -g WAYLAND_DISPLAY "$WAYLAND_DISPLAY" 2>/dev/null
+    tmux set-environment -g XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR" 2>/dev/null
+
+    # Inject these variables into all existing panes
+    for pane in $(tmux list-panes -a -F '#{pane_id}'; do
+	tmux send-keys -t "$pane" "export WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" C-m
+    done
+fi
+
+# Add git completions to the shell
+[ -e "/usr/share/bash-completion/completions/git" ] && \. /usr/share/bash-completion/completions/git
+
 # TODO: Create an update function for nvm
 # TODO: It should check to see if the latest tag's sha1 == HEAD, and if not, prompt to update.
 
-export TERM=xterm-24bit
+#export TERM=xterm-24bit
+export TERM=xterm-256color
 # Some character definitions for various markers about branch state.
 #MAX_CONFLICTED_FILES=0
 #DELTA_CHAR="△"
