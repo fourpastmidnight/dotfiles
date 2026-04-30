@@ -36,6 +36,9 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
+#export TERM=xterm-24bit
+export TERM=xterm-256color
+
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -161,9 +164,11 @@ if command -v tmux >/dev/null && tmux info &>/dev/null; then
     tmux set-environment -g XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR" 2>/dev/null
 
     # Inject these variables into all existing panes
-    for pane in $(tmux list-panes -a -F '#{pane_id}'; do
-	tmux send-keys -t "$pane" "export WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" C-m
-    done
+    #for pane in $(tmux list-panes -a -F '#{pane_id}'); do
+    #    tmux send-keys -t "$pane" "export WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" C-m
+    #done
+    #export WAYLAND_DISPLAY=wayland-0 XDG_RUNTIME_DIR=/run/user/1001
+    
 fi
 
 # Add git completions to the shell
@@ -172,8 +177,6 @@ fi
 # TODO: Create an update function for nvm
 # TODO: It should check to see if the latest tag's sha1 == HEAD, and if not, prompt to update.
 
-#export TERM=xterm-24bit
-export TERM=xterm-256color
 # Some character definitions for various markers about branch state.
 #MAX_CONFLICTED_FILES=0
 #DELTA_CHAR="△"
