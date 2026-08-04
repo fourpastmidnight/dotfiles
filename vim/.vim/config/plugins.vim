@@ -157,24 +157,21 @@ Plug 'preservim/nerdcommenter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-" Git Utility Plugins
+" Git Utility Plugins (ORDERED)
 " ------------------------------------------------------------------------
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'junegunn/gv.vim' " Depends on vim-fugitive above.
-Plug 'idanarye/vim-merginal' " Depends on vim-fugitive, and on windows, vimproc.vim
+Plug 'junegunn/gv.vim' " Depends on vim-fugitive
+Plug 'idanarye/vim-merginal' " Depends on vim-fugitive
 Plug 'christoomey/vim-conflicted' " Depends on vim-fugitive
 Plug 'rhysd/committia.vim'
-"  The below plugin is deprecated in favor of the one immediately below it
-"Plug 'lambdalisue/gina.vim'
-Plug 'lambdalisue/vim-gin'
+Plug 'airblade/vim-gitgutter'
 
 " Other Utility Plugins
 " ------------------------------------------------------------------------
 
 " ORDERED Utility Plugins
 Plug 'tpope/vim-vinegar'
-"Plug 'mhinz/vim-signify'
 Plug 'MattesGroeger/vim-bookmarks'
 
 " UNORDERED Utility Plugins
@@ -196,7 +193,7 @@ Plug 'vim-airline/vim-airline-themes'
 if !exists('$DISPLAY') && !exists('$WAYLAND_DISPLAY') && !exists('$TMUX')
     Plug 'enricobacis/vim-airline-clock'
 endif
-Plug 'airblade/vim-gitgutter'
+
 Plug 'ryanoasis/vim-devicons'
 
 " This plug-in should load last (just before colorschemes) so that it can
