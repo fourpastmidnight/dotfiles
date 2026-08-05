@@ -69,6 +69,37 @@ function! LoadIfExists(relpath)
     endif
 endfunction
 
+" This function provides a cross-platform way of running an arbitrary command
+" in the system shell. For Linux, MacOS and WSL, this would be whatever the
+" default shell is for those systems--typically /usr/bin/bash. For Windows,
+" this function will prefer pwsh (PowerShell Core), and if that's not
+" available, then PowerShell (Desktop), followed by cmd.exe.
+"
+" NOTE: When using this function, be mindful that different shells have
+" different quoting rules! If needed later, quoting for different shells
+" will be implemented.
+function! s:ShellExecute(cmd) abort
+    if has('win32') || has('win64')
+        " Prefer PowerShell Core on Windows
+        if executable('pwsh')
+            let l:shell = 'pwsh -NoLogo -NoProfile -Command'
+            return system(l:shell . ' "' . a:cmd . '"')
+        endif
+
+        " Otherwise, fall back to PowerShell Desktop
+        if executable('powershell')
+            let l:shell = 'powershell -NoLogo -NoProfile -Command'
+            return system(l:shell . ' "' . a:cmd . '"')
+        endif
+
+        " Fallback to cmd.exe as a last resort...
+        return system('cmd /C ' . a:cmd)
+    else
+        " Unix-like systems
+        return system(a:cmd)
+    endif
+endfunction
+
 " Global vim configuration settings to be applied. Some of these may be
 " overridden by settings in loaded "modules".
 
